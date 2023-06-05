@@ -80,13 +80,13 @@ table {
     font-weight: 600;
     background-color: rgb(31, 54, 66);
     color: white;
-    transition: 0.3s;
+    transition: transform 0.2s ease-in;
 
 }
 .loginButton:hover{
     background-color: rgb(72, 128, 158);
     text-shadow: 1px 2px 5px rgb(31, 54, 66);
-
+    transform: scale(105%);
 }
 .loginButton:active{
     background-color: rgb(31, 54, 66);

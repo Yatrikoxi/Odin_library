@@ -56,10 +56,14 @@ table {
     font-family: 'Raleway', sans-serif;
     font-size: 2rem;
     font-weight: 800;
+    text-shadow: 1px 1px 2px;
 }
-
+svg {
+    color: blue;
+}
+/* top wrapper */
 .odinLogo{
-    width: 50px;
+    width: 70px;
     height: auto;
     padding-right: 1rem;
 }
@@ -92,6 +96,73 @@ table {
     background-color: rgb(31, 54, 66);
     color: white;
 }
+/* book collection */
+.bottomWrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+.bookCard{
+    border: none;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px black;
+    color: white;
+    background-color: rgb(31, 54, 66);
+    min-width: 7rem;
+    min-height: 5rem;
+    width: 25rem;
+    height: 10rem;
+    margin: 2rem;
+    gap: 2rem;
+    padding: 2rem;
+    text-overflow: ellipsis;
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+.buttonDiv{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+.dataText{
+    font-family: 'Raleway', sans-serif;
+
+}
+.headerText{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+}
+.yesBtn{
+    background-color: rgb(255, 0, 0);
+    border: none;
+    height: 1.5rem;
+    font-family: 'Raleway', sans-serif;
+}
+.yesBtn:hover{
+    color: white;
+}
+.noBtn{
+    background-color: rgb(9, 255, 0);
+    border: none;
+    height: 1.5rem;
+    font-family: 'Raleway', sans-serif;
+}
+.noBtn:hover{
+    color: white;
+}
+.deleteBtn{
+    border: none;
+    height: 1.5rem;
+    font-family: 'Raleway', sans-serif;
+}
+.deleteBtn:hover{
+    background-color: rgb(95, 95, 95);
+    color: red;
+    font-weight: bold;
+}
+.deleteBtn:active{
+    background-color: white;
+}
+/* add Icon and footer */
 .plusIcon{
     min-width: 5rem;
     min-height: 5rem;
@@ -103,7 +174,7 @@ table {
     transition: transform .6s ease-in;
 }
 .plusIcon:hover{
-    transform: rotate(180deg) scale(125%);
+    transform: rotate(180deg) scale(120%);
 }
 .footer{
     position: fixed;

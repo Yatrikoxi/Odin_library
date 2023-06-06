@@ -160,6 +160,7 @@ table {
 .deleteBtn:active{
     background-color: white;
 }
+/* add form */
 .popupForm{
     width: 20rem;
     height: 22rem;

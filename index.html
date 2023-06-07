@@ -45,25 +45,25 @@
         </div>
         <div class="buttonDiv">
           <p class="headerText">Delete?</p>
-          <button class="deleteBtn">DELETE</button>
+          <button class="deleteBtn" id="deleteBookBtn">DELETE</button>
         </div>
       </div>
-      <img src="/Icons/add-button.svg" class="plusIcon" id="plusIcon" />
+      <img src="Icons/add-button.svg" class="plusIcon" id="plusIcon" />
     </div>
     <div class="popupForm" id="popupFormId">
       <img src="Icons/x-symbol.svg" class="x-symbol" id="closeBtn" />
       <form action="post" class="formPopup">
         <label for="name"
           >Name:
-          <input type="text" class="inputType" />
+          <input type="text" class="inputType" id="bookName" />
         </label>
         <label for="author">
           Author:
-          <input type="text" class="inputType" />
+          <input type="text" class="inputType" id="bookAuthor" />
         </label>
         <label for="Pages">
           Pages:
-          <input type="number" class="inputType" />
+          <input type="number" class="inputType" id="bookPages" />
         </label>
         <label for="read"
           >Read:

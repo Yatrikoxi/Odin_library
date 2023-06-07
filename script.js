@@ -15,39 +15,48 @@ function openPopup() {
 function closePopup() {
     popupForm.classList.remove("openPopup")
 }
+function clearForm() {
+    bookName.value = "";
+    bookAuthor.value = "";
+    bookPages.value = "";
+}
 plusIcon.addEventListener('click', () => {
     openPopup();
 });
 closeSymbol.addEventListener('click', () => {
     closePopup();
+    clearForm();
 })
 
 // Library constructor
-
-const formBook = function Book(name, author, pages,Boolean) {
+const myLibrary = [];
+const formBook = function Book(name, author, pages, boolean) {
     this.name = name,
     this.author = author,
     this.pages = pages,
-    this.Boolean = Boolean;
+    this.boolean = boolean;
 }
 const addBookToLibrary = () => {
     let title = bookName.value;
     let author = bookAuthor.value;
     let pages = bookPages.value;
     let read = getReadValue();
-    let newBook = new Book(title, author, pages, read);
+    let newBook = new formBook(title, author, pages, read);
     myLibrary.push(newBook)
 }
 
 const getReadValue = () => {
-    if(form.querySelector('input[id="readOrNot"]:checked').value == 'yes') return true;
+    if(readOrNot.value == "yes") return true;
     else return false;
   }
 
-const myLibrary = [];
+
 
 submitBtn.addEventListener('click', (event) => {
     event.preventDefault();
     addBookToLibrary();
-    console.log(myLibrary)
+    console.log(myLibrary);
+    clearForm();
+    closePopup();
+
 })

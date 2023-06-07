@@ -219,7 +219,7 @@ table {
     transition: transform .6s ease-in;
 }
 .plusIcon:hover{
-    transform: rotate(180deg) scale(120%);
+    transform: rotate(90deg) scale(120%);
 }
 .footer{
     position: fixed;

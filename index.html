@@ -23,7 +23,7 @@
   <body>
     <div class="topWrapper">
       <div class="logoPart">
-        <img class="odinLogo" src="/Icons/Odin-logo.svg" alt="the Odin Logo" />
+        <img class="odinLogo" src="Icons/Odin-logo.svg" alt="the Odin Logo" />
         <h1 class="projectName">the Odin Library</h1>
       </div>
       <div class="loginPart">
@@ -36,30 +36,38 @@
           Name: <span class="dataText">The Fellowship of the Ring</span>
         </p>
         <p class="headerText">
-            Author:  <span class="dataText">J.R.R. Tolkien</Author:span>
+          Author: <span class="dataText">J.R.R. Tolkien</span>
         </p>
-        <p class="headerText">Pages: <span class="dataText">423</Pages:span></p>
-        <div class="buttonDiv"><p class="headerText">Read:</p><button class="yesBtn">NO</button></div>
-        <div class="buttonDiv"><p class="headerText">Delete?</p><button class="deleteBtn">DELETE</button></div>
+        <p class="headerText">Pages: <span class="dataText">423</span></p>
+        <div class="buttonDiv">
+          <p class="headerText">Read:</p>
+          <button class="yesBtn">NO</button>
+        </div>
+        <div class="buttonDiv">
+          <p class="headerText">Delete?</p>
+          <button class="deleteBtn">DELETE</button>
+        </div>
       </div>
-      <img src="/Icons/add-button.svg" class="plusIcon" id="plusIcon"/>
+      <img src="/Icons/add-button.svg" class="plusIcon" id="plusIcon" />
     </div>
     <div class="popupForm" id="popupFormId">
-      <img src="Icons/x-symbol.svg" class="x-symbol" id="closeBtn">
+      <img src="Icons/x-symbol.svg" class="x-symbol" id="closeBtn" />
       <form action="post" class="formPopup">
-        <label for="name">Name: 
-          <input type="text" class="inputType">
+        <label for="name"
+          >Name:
+          <input type="text" class="inputType" />
         </label>
         <label for="author">
           Author:
-          <input type="text" class="inputType">
+          <input type="text" class="inputType" />
         </label>
         <label for="Pages">
           Pages:
-          <input type="number" class="inputType">
-          </label>
-          <label for="read">Read:
-          <input type="checkbox" name="" id="readOrNot" class="inputType">
+          <input type="number" class="inputType" />
+        </label>
+        <label for="read"
+          >Read:
+          <input type="checkbox" name="" id="readOrNot" class="inputType" />
         </label>
         <button class="loginButton submitBtn">Submit</button>
       </form>
@@ -67,6 +75,6 @@
     <footer class="footer">
       <p id="footer">©Yatrikoxi - the Odin Project 2023</p>
     </footer>
-    <script src="/script.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

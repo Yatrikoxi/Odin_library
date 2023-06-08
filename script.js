@@ -31,7 +31,13 @@ closeSymbol.addEventListener('click', () => {
 })
 
 // Library constructor
-const myLibrary = [];
+const myLibrary = [
+    {name: "The Fellowship of the Ring",
+    author: "J.R.R. Tolkien",
+    pages: "423",
+    boolean: false,
+}];
+
 function Book(name, author, pages, boolean) {
     this.name = name,
     this.author = author,
@@ -51,57 +57,55 @@ const getReadValue = () => {
     if(readOrNot.value == "yes") return true;
     else return false;
 }
-function bookCard() {
-let card = document.createElement("div");
-card.classList.add("bookCard");
-bottomWrapper.appendChild(card);
-let name = document.createElement("p");
-name.classList.add("headerText")
-name.innerHTML = 'Name: ';
-let nameContent = document.createElement("span");
-nameContent.classList.add("dataText");
-nameContent.innerHTML = `${this.title}`;
-let author = document.createElement("p");
-author.classList.add("headerText")
-author.innerHTML = 'Author: ';
-let authorContent = document.createElement("span");
-authorContent.classList.add("dataText");
-authorContent.innerHTML = `${this.author}`;
-let pages = document.createElement("p");
-pages.classList.add("headerText")
-pages.innerHTML = 'Pages: ';
-let pagesContent = document.createElement("span");
-pagesContent.classList.add("dataText");
-pagesContent.innerHTML = `${this.pages}`;
 
-let read = document.createElement("p");
-read.classList.add("headerText");
-read.innerHTML = 'Read: ';
-let readContent = document.createElement("button");
- if (getReadValue() == true) {
-    readContent.classList.add("noBtn")
-    readContent.textContent = "YES";
-}else {
-    readContent.classList.add("yesBtn")
-    readContent.textContent = "NO";
-}
-// Content.classList.add("dataText");
-// authorContent.innerHTML = `${this.author}`;
-name.appendChild(nameContent);
-author.appendChild(authorContent);
-pages.appendChild(pagesContent);
-read.appendChild(readContent);
+const cardCreateFunc = function cardCreate() {
+    let card = document.createElement("div");
+            card.classList.add("bookCard");
+            bottomWrapper.appendChild(card);
+    let nameBook = document.createElement("p");
+            nameBook.classList.add("headerText")
+            nameBook.innerHTML = 'Name: ';
+    let nameContent = document.createElement("span");
+            nameContent.classList.add("dataText");
+            nameContent.innerHTML = `${this.name}`;
+    let authorBook = document.createElement("p");
+            authorBook.classList.add("headerText")
+            authorBook.innerHTML = 'Author: ';
+    let authorContent = document.createElement("span");
+            authorContent.classList.add("dataText");
+            authorContent.innerHTML = `${this.author}`;
+    let pagesBook = document.createElement("p");
+            pagesBook.classList.add("headerText")
+            pagesBook.innerHTML = 'Pages: ';
+    let pagesContent = document.createElement("span");
+            pagesContent.classList.add("dataText");
+            pagesContent.innerHTML = `${this.pages}`;
+    let readBook = document.createElement("p");
+        readBook.classList.add("headerText");
+        readBook.innerHTML = 'Read: ';
+    let readContent = document.createElement("button");
+        if (getReadValue() == true) {
+            readContent.classList.add("noBtn")
+            readContent.textContent = "YES";
+        } else {
+            readContent.classList.add("yesBtn")
+            readContent.textContent = "NO";
+        }
+nameBook.appendChild(nameContent);
+authorBook.appendChild(authorContent);
+pagesBook.appendChild(pagesContent);
+readBook.appendChild(readContent);
 
-card.appendChild(name);
-card.appendChild(author);
-card.appendChild(pages);
-card.appendChild(read);
+card.appendChild(nameBook);
+card.appendChild(authorBook);
+card.appendChild(pagesBook);
+card.appendChild(readBook);
 }
 
+myLibrary.forEach(cardCreateFunc);
 submitBtn.addEventListener('click', (event) => {
     event.preventDefault();
     addBookToLibrary();
-    bookCard(myLibrary)
     console.log(myLibrary);
     clearForm();
     closePopup();

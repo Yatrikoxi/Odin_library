@@ -8,6 +8,8 @@ let yesBtn = document.getElementsByClassName("yesBtn");
 let form = document.getElementById("form");
 let submitBtn = document.getElementById("submitBtn");
 let closeSymbol = document.getElementById("closeBtn");
+let bottomWrapper = document.getElementById("bottomWrapper");
+
 
 function openPopup() {
     popupForm.classList.add("openPopup")
@@ -48,9 +50,12 @@ const addBookToLibrary = () => {
 const getReadValue = () => {
     if(readOrNot.value == "yes") return true;
     else return false;
-  }
-
-
+}
+function bookCard(myLibrary) {
+let card = document.createElement("div");
+card.classList.add("bookCard");
+bottomWrapper.appendChild(card);
+}
 
 submitBtn.addEventListener('click', (event) => {
     event.preventDefault();
@@ -58,5 +63,4 @@ submitBtn.addEventListener('click', (event) => {
     console.log(myLibrary);
     clearForm();
     closePopup();
-
 })

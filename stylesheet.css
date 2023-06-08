@@ -216,10 +216,10 @@ table {
     position: absolute;
     bottom: 5rem;
     right: 3rem;
-    transition: transform .6s ease-in;
+    transition: transform .2s ease-in;
 }
 .plusIcon:hover{
-    transform: rotate(90deg) scale(120%);
+    transform: scale(120%);
 }
 .footer{
     position: fixed;

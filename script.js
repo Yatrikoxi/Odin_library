@@ -4,12 +4,13 @@ let bookName = document.getElementById("bookName");
 let bookAuthor = document.getElementById("bookAuthor");
 let bookPages = document.getElementById("bookPages");
 let readOrNot = document.getElementById("readOrNot");
-let yesBtn = document.getElementsByClassName("yesBtn");
+let yesBtn = document.getElementById("yesBtn");
 let form = document.getElementById("form");
 let submitBtn = document.getElementById("submitBtn");
 let closeSymbol = document.getElementById("closeBtn");
 let bottomWrapper = document.getElementById("bottomWrapper");
-
+let deleteBtn = document.getElementById("deleteBookBtn");
+let buttonDiv = document.getElementsByClassName("buttonDiv");
 
 function openPopup() {
     popupForm.classList.add("openPopup")
@@ -58,7 +59,7 @@ const getReadValue = () => {
     else return false;
 }
 
-const cardCreateFunc = function cardCreate() {
+function cardCreate(myLibrary) {
     let card = document.createElement("div");
             card.classList.add("bookCard");
             bottomWrapper.appendChild(card);
@@ -67,19 +68,19 @@ const cardCreateFunc = function cardCreate() {
             nameBook.innerHTML = 'Name: ';
     let nameContent = document.createElement("span");
             nameContent.classList.add("dataText");
-            nameContent.innerHTML = `${this.name}`;
+            nameContent.innerHTML = `${myLibrary.name}`;
     let authorBook = document.createElement("p");
             authorBook.classList.add("headerText")
             authorBook.innerHTML = 'Author: ';
     let authorContent = document.createElement("span");
             authorContent.classList.add("dataText");
-            authorContent.innerHTML = `${this.author}`;
+            authorContent.innerHTML = `${myLibrary.author}`;
     let pagesBook = document.createElement("p");
             pagesBook.classList.add("headerText")
             pagesBook.innerHTML = 'Pages: ';
     let pagesContent = document.createElement("span");
             pagesContent.classList.add("dataText");
-            pagesContent.innerHTML = `${this.pages}`;
+            pagesContent.innerHTML = `${myLibrary.pages}`;
     let readBook = document.createElement("p");
         readBook.classList.add("headerText");
         readBook.innerHTML = 'Read: ';
@@ -91,22 +92,53 @@ const cardCreateFunc = function cardCreate() {
             readContent.classList.add("yesBtn")
             readContent.textContent = "NO";
         }
+        readContent.setAttribute("id", "yesBtn");
+let buttonDivRead = document.createElement('div');
+        buttonDivRead.classList.add("buttonDiv");
+    
+    let deleteBtn = document.createElement("p");
+        deleteBtn.classList.add("headerText");
+        deleteBtn.innerHTML = 'Delete? ';
+    let deleteBtnContent = document.createElement("button");
+        deleteBtnContent.classList.add("deleteBtn")
+        deleteBtnContent.innerHTML = 'DELETE';
+let buttonDivDelete = document.createElement('div');
+        buttonDivDelete.classList.add("buttonDiv");
+
+
 nameBook.appendChild(nameContent);
 authorBook.appendChild(authorContent);
 pagesBook.appendChild(pagesContent);
-readBook.appendChild(readContent);
+buttonDivRead.appendChild(readBook);
+buttonDivRead.appendChild(readContent)
+buttonDivDelete.appendChild(deleteBtn);
+buttonDivDelete.appendChild(deleteBtnContent);
 
 card.appendChild(nameBook);
 card.appendChild(authorBook);
 card.appendChild(pagesBook);
-card.appendChild(readBook);
+card.appendChild(buttonDivRead);
+card.appendChild(buttonDivDelete);
+}
+function readOrNotFunc(boolean) {
+    if (boolean == true){
+        yesBtn.classList.add("noBtn");
+        yesBtn.innerHTML = "YES";
+    } else {
+        yesBtn.classList.add("yesBtn");
+        yesBtn.innerHTML = 'NO'; 
+    }
 }
 
-myLibrary.forEach(cardCreateFunc);
 submitBtn.addEventListener('click', (event) => {
     event.preventDefault();
     addBookToLibrary();
-    console.log(myLibrary);
+    cardCreate(myLibrary)
     clearForm();
     closePopup();
 })
+
+// yesBtn.addEventListener('click', () => {
+//     readOrNotFunc()
+// })
+myLibrary.forEach(cardCreate);

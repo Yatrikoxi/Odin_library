@@ -4,12 +4,13 @@ let bookName = document.getElementById("bookName");
 let bookAuthor = document.getElementById("bookAuthor");
 let bookPages = document.getElementById("bookPages");
 let readOrNot = document.getElementById("readOrNot");
-let yesBtn = document.getElementById("yesBtn");
+let yesBtn = document.querySelector("#yesBtn");
+let noBtn = document.querySelector("#noBtn");
 let form = document.getElementById("form");
 let submitBtn = document.getElementById("submitBtn");
 let closeSymbol = document.getElementById("closeBtn");
 let bottomWrapper = document.getElementById("bottomWrapper");
-let deleteBtn = document.getElementById("deleteBookBtn");
+let deleteBtn = document.querySelector("#deleteBookBtn");
 let buttonDiv = document.getElementsByClassName("buttonDiv");
 
 function openPopup() {
@@ -37,13 +38,20 @@ const myLibrary = [
     author: "J.R.R. Tolkien",
     pages: "423",
     boolean: false,
-}];
+}]
 
 function Book(name, author, pages, boolean) {
     this.name = name,
     this.author = author,
     this.pages = pages,
     this.boolean = boolean;
+}
+Book.prototype.toggleRead = function () {
+    this.read = !this.read;
+}
+function toggleRead (index) {
+    myLibrary[index].toggleRead();
+    cardCreate();
 }
 const addBookToLibrary = () => {
     let name = bookName.value;
@@ -58,8 +66,16 @@ const getReadValue = () => {
     if(readOrNot.value == "yes") return true;
     else return false;
 }
+function removeBook(index) {
+    myLibrary.splice(index, 1);
+    cardCreate();
+}
 
-function cardCreate(myLibrary) {
+function cardCreate() {
+    let libraryEl = document.querySelector("#bottomWrapper");
+    libraryEl.innerHTML = "";
+    for(let i = 0; i < myLibrary.length; i++){
+        let book = myLibrary[i];
     let card = document.createElement("div");
             card.classList.add("bookCard");
             bottomWrapper.appendChild(card);
@@ -68,19 +84,19 @@ function cardCreate(myLibrary) {
             nameBook.innerHTML = 'Name: ';
     let nameContent = document.createElement("span");
             nameContent.classList.add("dataText");
-            nameContent.innerHTML = `${myLibrary.name}`;
+            nameContent.innerHTML = `${book.name}`;
     let authorBook = document.createElement("p");
             authorBook.classList.add("headerText")
             authorBook.innerHTML = 'Author: ';
     let authorContent = document.createElement("span");
             authorContent.classList.add("dataText");
-            authorContent.innerHTML = `${myLibrary.author}`;
+            authorContent.innerHTML = `${book.author}`;
     let pagesBook = document.createElement("p");
             pagesBook.classList.add("headerText")
             pagesBook.innerHTML = 'Pages: ';
     let pagesContent = document.createElement("span");
             pagesContent.classList.add("dataText");
-            pagesContent.innerHTML = `${myLibrary.pages}`;
+            pagesContent.innerHTML = `${book.pages}`;
     let readBook = document.createElement("p");
         readBook.classList.add("headerText");
         readBook.innerHTML = 'Read: ';
@@ -101,6 +117,7 @@ let buttonDivRead = document.createElement('div');
         deleteBtn.innerHTML = 'Delete? ';
     let deleteBtnContent = document.createElement("button");
         deleteBtnContent.classList.add("deleteBtn")
+        deleteBtnContent.setAttribute("id", "deleteBookBtn");
         deleteBtnContent.innerHTML = 'DELETE';
 let buttonDivDelete = document.createElement('div');
         buttonDivDelete.classList.add("buttonDiv");
@@ -120,6 +137,7 @@ card.appendChild(pagesBook);
 card.appendChild(buttonDivRead);
 card.appendChild(buttonDivDelete);
 }
+}
 function readOrNotFunc(boolean) {
     if (boolean == true){
         yesBtn.classList.add("noBtn");
@@ -129,16 +147,16 @@ function readOrNotFunc(boolean) {
         yesBtn.innerHTML = 'NO'; 
     }
 }
-
+// deleteBtn.addEventListener('click', (event) => {
+//     event = removeBook(index);
+// })
 submitBtn.addEventListener('click', (event) => {
     event.preventDefault();
     addBookToLibrary();
-    cardCreate(myLibrary)
+
     clearForm();
     closePopup();
+    cardCreate();
 })
 
-// yesBtn.addEventListener('click', () => {
-//     readOrNotFunc()
-// })
 myLibrary.forEach(cardCreate);

@@ -5,8 +5,6 @@ let bookAuthor = document.getElementById("bookAuthor");
 let bookPages = document.getElementById("bookPages");
 let readOrNot = document.getElementById("readOrNot");
 let yesBtn = document.querySelector("#yesBtn");
-let noBtn = document.querySelector("#noBtn");
-let form = document.getElementById("form");
 let submitBtn = document.getElementById("submitBtn");
 let closeSymbol = document.getElementById("closeBtn");
 let bottomWrapper = document.getElementById("bottomWrapper");
@@ -37,22 +35,24 @@ const myLibrary = [
     {name: "The Fellowship of the Ring",
     author: "J.R.R. Tolkien",
     pages: "423",
-    boolean: false,
+    read: false,
 }]
 
-function Book(name, author, pages, boolean) {
+function Book(name, author, pages, read) {
     this.name = name,
     this.author = author,
     this.pages = pages,
-    this.boolean = boolean;
+    this.read = read;
+}
+function toggleRead (index) {
+    myLibrary[index].toggleRead();
+    console.log(read);
+    cardCreate();
 }
 Book.prototype.toggleRead = function () {
     this.read = !this.read;
 }
-function toggleRead (index) {
-    myLibrary[index].toggleRead();
-    cardCreate();
-}
+
 const addBookToLibrary = () => {
     let name = bookName.value;
     let author = bookAuthor.value;
@@ -77,69 +77,23 @@ function cardCreate() {
     for(let i = 0; i < myLibrary.length; i++){
         let book = myLibrary[i];
     let card = document.createElement("div");
-            card.classList.add("bookCard");
-            bottomWrapper.appendChild(card);
-    let nameBook = document.createElement("p");
-            nameBook.classList.add("headerText")
-            nameBook.innerHTML = 'Name: ';
-    let nameContent = document.createElement("span");
-            nameContent.classList.add("dataText");
-            nameContent.innerHTML = `${book.name}`;
-    let authorBook = document.createElement("p");
-            authorBook.classList.add("headerText")
-            authorBook.innerHTML = 'Author: ';
-    let authorContent = document.createElement("span");
-            authorContent.classList.add("dataText");
-            authorContent.innerHTML = `${book.author}`;
-    let pagesBook = document.createElement("p");
-            pagesBook.classList.add("headerText")
-            pagesBook.innerHTML = 'Pages: ';
-    let pagesContent = document.createElement("span");
-            pagesContent.classList.add("dataText");
-            pagesContent.innerHTML = `${book.pages}`;
-    let readBook = document.createElement("p");
-        readBook.classList.add("headerText");
-        readBook.innerHTML = 'Read: ';
-    let readContent = document.createElement("button");
-        if (getReadValue() == true) {
-            readContent.classList.add("noBtn")
-            readContent.textContent = "YES";
-        } else {
-            readContent.classList.add("yesBtn")
-            readContent.textContent = "NO";
-        }
-        readContent.setAttribute("id", "yesBtn");
-let buttonDivRead = document.createElement('div');
-        buttonDivRead.classList.add("buttonDiv");
-    
-    let deleteBtn = document.createElement("p");
-        deleteBtn.classList.add("headerText");
-        deleteBtn.innerHTML = 'Delete? ';
-    let deleteBtnContent = document.createElement("button");
-        deleteBtnContent.classList.add("deleteBtn")
-        deleteBtnContent.setAttribute("id", "deleteBookBtn");
-        deleteBtnContent.innerHTML = 'DELETE';
-let buttonDivDelete = document.createElement('div');
-        buttonDivDelete.classList.add("buttonDiv");
-
-
-nameBook.appendChild(nameContent);
-authorBook.appendChild(authorContent);
-pagesBook.appendChild(pagesContent);
-buttonDivRead.appendChild(readBook);
-buttonDivRead.appendChild(readContent)
-buttonDivDelete.appendChild(deleteBtn);
-buttonDivDelete.appendChild(deleteBtnContent);
-
-card.appendChild(nameBook);
-card.appendChild(authorBook);
-card.appendChild(pagesBook);
-card.appendChild(buttonDivRead);
-card.appendChild(buttonDivDelete);
+        card.innerHTML = `
+        <div class="bookCard">
+            <p class="headerText">Name: <span class="dataText">${book.name}</span>
+            <p class="headerText">Author: <span class="dataText">${book.author}</span>
+            <p class="headerText">Pages: <span class="dataText">${book.pages}</span>
+            <div class="buttonDiv">
+            <p class="headerText">Read: </p><button id="yesBtn" onclick="toggleRead(${i})">NO</button>
+            </div>
+            <div class="buttonDiv">
+            <p class="headerText">Delete: </p><button class="deleteBtn" onclick="removeBook(${i})">DELETE</button>
+            </div>
+        </div>`;
+        bottomWrapper.appendChild(card);
 }
 }
-function readOrNotFunc(boolean) {
-    if (boolean == true){
+function readOrNotFunc(read) {
+    if (read == true){
         yesBtn.classList.add("noBtn");
         yesBtn.innerHTML = "YES";
     } else {
@@ -147,9 +101,6 @@ function readOrNotFunc(boolean) {
         yesBtn.innerHTML = 'NO'; 
     }
 }
-// deleteBtn.addEventListener('click', (event) => {
-//     event = removeBook(index);
-// })
 submitBtn.addEventListener('click', (event) => {
     event.preventDefault();
     addBookToLibrary();

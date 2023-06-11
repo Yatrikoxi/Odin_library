@@ -44,6 +44,8 @@ function Book(name, author, pages, read) {
     this.pages = pages,
     this.read = read;
 }
+
+
 function toggleRead (index) {
     myLibrary[index].toggleRead();
     console.log(read);
@@ -51,8 +53,8 @@ function toggleRead (index) {
 }
 Book.prototype.toggleRead = function () {
     this.read = !this.read;
+    return this.read;
 }
-
 const addBookToLibrary = () => {
     let name = bookName.value;
     let author = bookAuthor.value;
@@ -63,7 +65,7 @@ const addBookToLibrary = () => {
 }
 
 const getReadValue = () => {
-    if(readOrNot.value == "yes") return true;
+    if(readOrNot.value == "ON") return true;
     else return false;
 }
 function removeBook(index) {
@@ -83,7 +85,7 @@ function cardCreate() {
             <p class="headerText">Author: <span class="dataText">${book.author}</span>
             <p class="headerText">Pages: <span class="dataText">${book.pages}</span>
             <div class="buttonDiv">
-            <p class="headerText">Read: </p><button id="yesBtn" onclick="toggleRead(${i})">NO</button>
+            <p class="headerText">Read: </p><button id="yesBtn" onclick="toggleRead(${i})">${book.read ? "YES" : "NO"}</button>
             </div>
             <div class="buttonDiv">
             <p class="headerText">Delete: </p><button class="deleteBtn" onclick="removeBook(${i})">DELETE</button>

@@ -50,6 +50,7 @@ function Book(name, author, pages, read) {
 Book.prototype.toggleRead = function () {
     this.read = !this.read;
 }
+
 const addBookToLibrary = () => {
     let name = bookName.value;
     let author = bookAuthor.value;
@@ -61,7 +62,7 @@ const addBookToLibrary = () => {
 
 const getReadValue = () => {
     console.log(readOrNot.value);
-    if(readOrNot.value === "on") return true;
+    if(readOrNot.value == "yes") return true;
     else false;
 }
 function removeBook(index) {
@@ -95,15 +96,7 @@ function cardCreate() {
         bottomWrapper.appendChild(card);
 }
 }
-function readOrNotFunc(readOrNot) {
-    if (readOrNot == true){
-        yesBtn.classList.add("noBtn");
-        yesBtn.innerHTML = "YES";
-    } else {
-        yesBtn.classList.add("yesBtn");
-        yesBtn.innerHTML = 'NO'; 
-    }
-}
+
 submitBtn.addEventListener('click', (event) => {
     event.preventDefault();
     addBookToLibrary();
@@ -111,5 +104,4 @@ submitBtn.addEventListener('click', (event) => {
     closePopup();
     cardCreate();
 })
-
 myLibrary.forEach(cardCreate);

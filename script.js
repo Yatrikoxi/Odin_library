@@ -3,7 +3,7 @@ let popupForm = document.getElementById("popupFormId");
 let bookName = document.getElementById("bookName");
 let bookAuthor = document.getElementById("bookAuthor");
 let bookPages = document.getElementById("bookPages");
-let readOrNot = document.getElementById("readOrNot");
+let readOrNot = document.querySelector('#readOrNot');
 let yesBtn = document.querySelector("#yesBtn");
 let submitBtn = document.getElementById("submitBtn");
 let closeSymbol = document.getElementById("closeBtn");
@@ -32,11 +32,12 @@ closeSymbol.addEventListener('click', () => {
 
 // Library constructor
 const myLibrary = [
-    {name: "The Fellowship of the Ring",
-    author: "J.R.R. Tolkien",
-    pages: "423",
-    read: false,
-}]
+    {name: "1984",
+    author: "George Orwell",
+    pages: "328",
+    read: false, 
+}
+]
 
 function Book(name, author, pages, read) {
     this.name = name,
@@ -46,14 +47,8 @@ function Book(name, author, pages, read) {
 }
 
 
-function toggleRead (index) {
-    myLibrary[index].toggleRead();
-    console.log(read);
-    cardCreate();
-}
 Book.prototype.toggleRead = function () {
     this.read = !this.read;
-    return this.read;
 }
 const addBookToLibrary = () => {
     let name = bookName.value;
@@ -65,11 +60,17 @@ const addBookToLibrary = () => {
 }
 
 const getReadValue = () => {
-    if(readOrNot.value == "ON") return true;
-    else return false;
+    console.log(readOrNot.value);
+    if(readOrNot.value === "on") return true;
+    else false;
 }
 function removeBook(index) {
     myLibrary.splice(index, 1);
+    cardCreate();
+}
+
+function toggleRead (index) {
+    myLibrary[index].toggleRead();
     cardCreate();
 }
 
@@ -85,7 +86,7 @@ function cardCreate() {
             <p class="headerText">Author: <span class="dataText">${book.author}</span>
             <p class="headerText">Pages: <span class="dataText">${book.pages}</span>
             <div class="buttonDiv">
-            <p class="headerText">Read: </p><button id="yesBtn" onclick="toggleRead(${i})">${book.read ? "YES" : "NO"}</button>
+            <p class="headerText">Read: </p><button id="yesBtn" ${book.read ? `class="noBtn"` : `class="yesBtn"`} onclick='toggleRead(${i})'>${book.read ? "YES" : "NO"}</button>
             </div>
             <div class="buttonDiv">
             <p class="headerText">Delete: </p><button class="deleteBtn" onclick="removeBook(${i})">DELETE</button>
@@ -94,8 +95,8 @@ function cardCreate() {
         bottomWrapper.appendChild(card);
 }
 }
-function readOrNotFunc(read) {
-    if (read == true){
+function readOrNotFunc(readOrNot) {
+    if (readOrNot == true){
         yesBtn.classList.add("noBtn");
         yesBtn.innerHTML = "YES";
     } else {
@@ -106,7 +107,6 @@ function readOrNotFunc(read) {
 submitBtn.addEventListener('click', (event) => {
     event.preventDefault();
     addBookToLibrary();
-
     clearForm();
     closePopup();
     cardCreate();

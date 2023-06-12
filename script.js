@@ -35,21 +35,21 @@ const myLibrary = [
     {name: "1984",
     author: "George Orwell",
     pages: "328",
-    read: false, 
+    read: false
 }
 ]
 
 function Book(name, author, pages, read) {
-    this.name = name,
-    this.author = author,
-    this.pages = pages,
+    this.name = name;
+    this.author = author;
+    this.pages = pages;
     this.read = read;
-}
-
-
-Book.prototype.toggleRead = function () {
+  }
+  
+  Book.prototype.toggleRead = function() {
     this.read = !this.read;
-}
+  };
+  
 
 const addBookToLibrary = () => {
     let name = bookName.value;
@@ -61,42 +61,49 @@ const addBookToLibrary = () => {
 }
 
 const getReadValue = () => {
-    console.log(readOrNot.value);
-    if(readOrNot.value == "yes") return true;
-    else false;
-}
+    return readOrNot.value === "yes";
+};
+
 function removeBook(index) {
     myLibrary.splice(index, 1);
     cardCreate();
 }
 
-function toggleRead (index) {
+function toggleRead(index) {
     myLibrary[index].toggleRead();
     cardCreate();
-}
+  };
 
-function cardCreate() {
+  function cardCreate() {
     let libraryEl = document.querySelector("#bottomWrapper");
     libraryEl.innerHTML = "";
-    for(let i = 0; i < myLibrary.length; i++){
-        let book = myLibrary[i];
-    let card = document.createElement("div");
-        card.innerHTML = `
-        <div class="bookCard">
-            <p class="headerText">Name: <span class="dataText">${book.name}</span>
-            <p class="headerText">Author: <span class="dataText">${book.author}</span>
-            <p class="headerText">Pages: <span class="dataText">${book.pages}</span>
-            <div class="buttonDiv">
-            <p class="headerText">Read: </p><button id="yesBtn" ${book.read ? `class="noBtn"` : `class="yesBtn"`} onclick='toggleRead(${i})'>${book.read ? "YES" : "NO"}</button>
-            </div>
-            <div class="buttonDiv">
-            <p class="headerText">Delete: </p><button class="deleteBtn" onclick="removeBook(${i})">DELETE</button>
-            </div>
+    for (let i = 0; i < myLibrary.length; i++) {
+      let book = myLibrary[i];
+      let card = document.createElement("div");
+      card.className = "bookCard";
+      card.innerHTML = `
+        <p class="headerText">Name: <span class="dataText">${book.name}</span></p>
+        <p class="headerText">Author: <span class="dataText">${book.author}</span></p>
+        <p class="headerText">Pages: <span class="dataText">${book.pages}</span></p>
+        <div class="buttonDiv">
+          <p class="headerText">Read: </p>
+          <button class="toggleReadBtn ${book.read ? "noBtn" : "yesBtn"}">${book.read ? "YES" : "NO"}</button>
+        </div>
+        <div class="buttonDiv">
+          <p class="headerText">Delete: </p>
+          <button class="deleteBtn">DELETE</button>
         </div>`;
-        bottomWrapper.appendChild(card);
-}
-}
-
+  
+      bottomWrapper.appendChild(card);
+  
+      let toggleReadBtn = card.querySelector(".toggleReadBtn");
+      toggleReadBtn.addEventListener("click", () => {
+        toggleRead(i);
+      });
+    }
+  }
+  
+  
 submitBtn.addEventListener('click', (event) => {
     event.preventDefault();
     addBookToLibrary();
@@ -104,4 +111,4 @@ submitBtn.addEventListener('click', (event) => {
     closePopup();
     cardCreate();
 })
-myLibrary.forEach(cardCreate);
+cardCreate();

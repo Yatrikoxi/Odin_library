@@ -32,11 +32,7 @@ closeSymbol.addEventListener('click', () => {
 
 // Library constructor
 const myLibrary = [
-    {name: "1984",
-    author: "George Orwell",
-    pages: "328",
-    read: false
-}
+
 ]
 
 function Book(name, author, pages, read) {
@@ -73,8 +69,8 @@ function toggleRead(index) {
     myLibrary[index].toggleRead();
     cardCreate();
   };
-
-  function cardCreate() {
+  
+function cardCreate() {
     let libraryEl = document.querySelector("#bottomWrapper");
     libraryEl.innerHTML = "";
     for (let i = 0; i < myLibrary.length; i++) {
@@ -95,14 +91,21 @@ function toggleRead(index) {
         </div>`;
   
       bottomWrapper.appendChild(card);
-  
-      let toggleReadBtn = card.querySelector(".toggleReadBtn");
-      toggleReadBtn.addEventListener("click", () => {
-        toggleRead(i);
-      });
     }
   }
   
+  bottomWrapper.addEventListener("click", (event) => {
+    const target = event.target;
+    if (target.classList.contains("toggleReadBtn")) {
+      const card = target.closest('.bookCard');
+      const index = Array.from(bottomWrapper.children).indexOf(card);
+      toggleRead(index);
+    } else if (target.classList.contains("deleteBtn")) {
+      const card = target.closest('.bookCard');
+      const index = Array.from(bottomWrapper.children).indexOf(card);
+      removeBook(index);
+    }
+  });
   
 submitBtn.addEventListener('click', (event) => {
     event.preventDefault();

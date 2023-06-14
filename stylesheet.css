@@ -72,7 +72,7 @@ table {
 .loginPart{
     padding: 2rem;
 }
-.loginButton{
+.largeButton{
     padding: 1rem 2rem 1rem 2rem;
     border-radius: 25px;
     border: none;
@@ -84,12 +84,12 @@ table {
     transition: transform 0.2s ease-in;
 
 }
-.loginButton:hover{
+.largeButton:hover{
     background-color: rgb(72, 128, 158);
     text-shadow: 1px 2px 5px rgb(31, 54, 66);
     transform: scale(105%);
 }
-.loginButton:active{
+.largeButton:active{
     background-color: rgb(31, 54, 66);
     color: white;
 }

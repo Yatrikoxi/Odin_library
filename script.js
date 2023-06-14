@@ -108,10 +108,14 @@ function cardCreate() {
   });
   
 submitBtn.addEventListener('click', (event) => {
+    if (bookName.value == "" || bookAuthor.value == "" || bookPages.value == "") {
+      alert("Please fill out form!")
+    } else {
     event.preventDefault();
     addBookToLibrary();
     clearForm();
     closePopup();
     cardCreate();
+    }
 })
 cardCreate();
